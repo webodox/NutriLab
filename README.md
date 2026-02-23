@@ -1,4 +1,4 @@
-# How to compile and run NutrLab:
+# How to compile and run NutriLab:
 **Prerequisites:** Java JDK, Android SDK, Pixel 5 Device Emulator, or Android Studio
 
 **Steps:**

@@ -14,6 +14,7 @@ import com.example.nutrilab.data.repository.AuthRepository
 import kotlinx.coroutines.launch
 
 class DashboardActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -27,8 +28,13 @@ class DashboardActivity : AppCompatActivity() {
 
         val txtWelcome = findViewById<TextView>(R.id.txtWelcome)
         val btnLogout = findViewById<Button>(R.id.btnLogout)
+        val btnSymptoms = findViewById<Button>(R.id.btnSymptoms)
 
         txtWelcome.text = "Welcome!"
+
+        btnSymptoms.setOnClickListener {
+            startActivity(Intent(this@DashboardActivity, SymptomActivity::class.java))
+        }
 
         val db = AppDatabase.getInstance(this)
         val repo = AuthRepository(db.userDao(), db.sessionDao())

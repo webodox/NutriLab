@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "990097591174",
+    "project_id": "nutrilab-913c6",
+    "storage_bucket": "nutrilab-913c6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:990097591174:android:a3de55c87eaeea2145ba07",
+        "android_client_info": {
+          "package_name": "com.example.nutrilab"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZkKix2oqmWkxYo-l9hBZaF8iJiVZuOVE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -11,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.nutrilab.data.AppDatabase
 import com.example.nutrilab.data.repository.AuthRepository
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 
 class DashboardActivity : AppCompatActivity() {
@@ -36,15 +37,21 @@ class DashboardActivity : AppCompatActivity() {
             startActivity(Intent(this@DashboardActivity, SymptomActivity::class.java))
         }
 
-        val db = AppDatabase.getInstance(this)
-        val repo = AuthRepository(db.userDao(), db.sessionDao())
+        //val db = AppDatabase.getInstance(this)
+        //val repo = AuthRepository(db.userDao(), db.sessionDao())
 
-        btnLogout.setOnClickListener {
+        /*btnLogout.setOnClickListener {
             lifecycleScope.launch {
                 repo.logout()
                 startActivity(Intent(this@DashboardActivity, MainActivity::class.java))
                 finish()
             }
+        }*/
+
+        btnLogout.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            startActivity(Intent(this@DashboardActivity, MainActivity::class.java))
+            finish()
         }
     }
 }

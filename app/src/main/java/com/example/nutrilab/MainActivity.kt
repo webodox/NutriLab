@@ -9,12 +9,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.nutrilab.data.AppDatabase
 import com.example.nutrilab.data.repository.AuthRepository
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (FirebaseAuth.getInstance().currentUser != null){
+            startActivity(Intent(this@MainActivity, DashboardActivity::class.java))
+            finish()
+            return
+        }
         setContentView(R.layout.activity_main)
 
         val editEmail = findViewById<EditText>(R.id.editEmail)
@@ -22,16 +29,16 @@ class MainActivity : AppCompatActivity() {
         val btnLogin = findViewById<Button>(R.id.btnLogin)
         val btnGoRegister = findViewById<Button>(R.id.btnGoRegister)
 
-        val db = AppDatabase.getInstance(this)
+        /*val db = AppDatabase.getInstance(this)
         val repo = AuthRepository(db.userDao(), db.sessionDao())
 
-        // Auto-skip login if session exists
+        / Auto-skip login if session exists
         lifecycleScope.launch {
             if (repo.hasActiveSession()) {
                 startActivity(Intent(this@MainActivity, DashboardActivity::class.java))
                 finish()
             }
-        }
+        }*/
 
         // LOGIN BUTTON
         btnLogin.setOnClickListener {
@@ -43,7 +50,7 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            lifecycleScope.launch {
+            /*lifecycleScope.launch {
                 val result = repo.login(email, pass)
                 if (result.isSuccess) {
                     Toast.makeText(this@MainActivity, "Login success", Toast.LENGTH_SHORT).show()
@@ -56,7 +63,22 @@ class MainActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-            }
+            }*/
+
+            FirebaseAuth.getInstance()
+                .signInWithEmailAndPassword(email, pass)
+                .addOnSuccessListener {
+                    Toast.makeText(this@MainActivity, "Login success", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this@MainActivity, DashboardActivity::class.java))
+                    finish()
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(
+                        this@MainActivity,
+                        e.message ?: "Login failed",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
         }
 
         // CREATE ACCOUNT BUTTON

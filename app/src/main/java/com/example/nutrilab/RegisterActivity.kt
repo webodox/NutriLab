@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.nutrilab.data.AppDatabase
 import com.example.nutrilab.data.entity.UserEntity
 import com.example.nutrilab.data.repository.AuthRepository
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 
 class RegisterActivity : AppCompatActivity() {
@@ -23,8 +26,8 @@ class RegisterActivity : AppCompatActivity() {
         val editPassword = findViewById<EditText>(R.id.editPassword)
         val btnCreate = findViewById<Button>(R.id.btnCreateAccount)
 
-        val db = AppDatabase.getInstance(this)
-        val repo = AuthRepository(db.userDao(), db.sessionDao())
+        //val db = AppDatabase.getInstance(this)
+        //val repo = AuthRepository(db.userDao(), db.sessionDao())
 
         btnCreate.setOnClickListener {
             val first = editFirstName.text.toString().trim()
@@ -37,7 +40,7 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            lifecycleScope.launch {
+            /*lifecycleScope.launch {
                 val user = UserEntity(
                     email = email,
                     password = pass,
@@ -57,7 +60,36 @@ class RegisterActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+            }*/
+
+            //creating user collection. password hashed by firebase
+            FirebaseAuth.getInstance()
+                .createUserWithEmailAndPassword(email, pass)
+                .addOnSuccessListener { authResult ->
+                    val userId = authResult.user?.uid ?: return@addOnSuccessListener
+                    val user = hashMapOf(
+                        "firstName" to first,
+                        "lastName" to last,
+                        "email" to email
+                    )
+
+                    FirebaseFirestore.getInstance()
+                        .collection("users")
+                        .document(userId)
+                        .set(user)
+                        .addOnSuccessListener {
+                            Toast.makeText(this@RegisterActivity, "Account created! Login now.", Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
+                            finish()
+                        }
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(
+                        this@RegisterActivity,
+                        e.message ?: "Registration failed",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }
-}

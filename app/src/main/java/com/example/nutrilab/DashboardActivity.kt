@@ -29,11 +29,16 @@ class DashboardActivity : AppCompatActivity() {
         val txtWelcome = findViewById<TextView>(R.id.txtWelcome)
         val btnLogout = findViewById<Button>(R.id.btnLogout)
         val btnSymptoms = findViewById<Button>(R.id.btnSymptoms)
+        val btnSearch = findViewById<Button>(R.id.btnSearch)
 
         txtWelcome.text = "Welcome!"
 
         btnSymptoms.setOnClickListener {
             startActivity(Intent(this@DashboardActivity, SymptomActivity::class.java))
+        }
+
+        btnSearch.setOnClickListener {
+            startActivity(Intent(this@DashboardActivity, SearchActivity::class.java))
         }
 
         val db = AppDatabase.getInstance(this)

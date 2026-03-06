@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.example.nutrilab.data.AppDatabase
 import com.example.nutrilab.data.entity.SymptomLogEntity
 import com.example.nutrilab.data.repository.SymptomRepository
+import kotlinx.coroutines.launch
 
 class SymptomActivity : AppCompatActivity() {
 
@@ -29,30 +32,34 @@ class SymptomActivity : AppCompatActivity() {
         btnFatigue.setOnClickListener { toggle("Fatigue") }
         btnNausea.setOnClickListener { toggle("Nausea") }
 
+        val db = AppDatabase.getInstance(this)
+        
         btnSubmit.setOnClickListener {
-            // TODO: replace with real logged-in userId from your session
-            val userId = "testUser123"
+            lifecycleScope.launch {
+                val session = db.sessionDao().getActiveSession()
+                val userId = session?.userId?.toString() ?: "anonymous"
 
-            if (selectedSymptoms.isEmpty()) {
-                Toast.makeText(this, "Select at least one symptom", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            val log = SymptomLogEntity(
-                userId = userId,
-                symptoms = selectedSymptoms.toList()
-            )
-
-            SymptomRepository.addSymptomLog(
-                log,
-                onSuccess = {
-                    Toast.makeText(this, "Symptoms saved!", Toast.LENGTH_SHORT).show()
-                    selectedSymptoms.clear()
-                },
-                onError = { e ->
-                    Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_LONG).show()
+                if (selectedSymptoms.isEmpty()) {
+                    Toast.makeText(this@SymptomActivity, "Select at least one symptom", Toast.LENGTH_SHORT).show()
+                    return@launch
                 }
-            )
+
+                val log = SymptomLogEntity(
+                    userId = userId,
+                    symptoms = selectedSymptoms.toList()
+                )
+
+                SymptomRepository.addSymptomLog(
+                    log,
+                    onSuccess = {
+                        Toast.makeText(this@SymptomActivity, "Symptoms saved!", Toast.LENGTH_SHORT).show()
+                        selectedSymptoms.clear()
+                    },
+                    onError = { e ->
+                        Toast.makeText(this@SymptomActivity, "Error: ${e.message}", Toast.LENGTH_LONG).show()
+                    }
+                )
+            }
         }
     }
 }

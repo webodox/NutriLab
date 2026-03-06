@@ -78,7 +78,11 @@ class RegisterActivity : AppCompatActivity() {
                         .document(userId)
                         .set(user)
                         .addOnSuccessListener {
-                            Toast.makeText(this@RegisterActivity, "Account created! Login now.", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this@RegisterActivity,
+                                "Account created! Login now.",
+                                Toast.LENGTH_SHORT
+                            ).show()
                             startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
                             finish()
                         }
@@ -90,6 +94,6 @@ class RegisterActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-            }
+        }
         }
     }

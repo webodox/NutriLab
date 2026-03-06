@@ -37,10 +37,10 @@ class DashboardActivity : AppCompatActivity() {
             startActivity(Intent(this@DashboardActivity, SymptomActivity::class.java))
         }
 
-        //val db = AppDatabase.getInstance(this)
-        //val repo = AuthRepository(db.userDao(), db.sessionDao())
+        /*val db = AppDatabase.getInstance(this)
+        val repo = AuthRepository(db.userDao(), db.sessionDao())
 
-        /*btnLogout.setOnClickListener {
+        btnLogout.setOnClickListener {
             lifecycleScope.launch {
                 repo.logout()
                 startActivity(Intent(this@DashboardActivity, MainActivity::class.java))

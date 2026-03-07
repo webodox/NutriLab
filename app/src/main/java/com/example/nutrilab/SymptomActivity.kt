@@ -1,7 +1,9 @@
 package com.example.nutrilab
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -22,6 +24,9 @@ class SymptomActivity : AppCompatActivity() {
         val btnFatigue = findViewById<Button>(R.id.btnFatigue)
         val btnNausea = findViewById<Button>(R.id.btnNausea)
         val btnSubmit = findViewById<Button>(R.id.btnSubmitSymptoms)
+        val btnHome= findViewById<ImageView>(R.id.homebutton)
+        val btnProfile = findViewById<ImageView>(R.id.profilebutton)
+
 
         fun toggle(symptom: String) {
             if (selectedSymptoms.contains(symptom)) selectedSymptoms.remove(symptom)
@@ -31,6 +36,16 @@ class SymptomActivity : AppCompatActivity() {
         btnHeadache.setOnClickListener { toggle("Headache") }
         btnFatigue.setOnClickListener { toggle("Fatigue") }
         btnNausea.setOnClickListener { toggle("Nausea") }
+
+        //bottom navigation bar: dashboard
+        btnHome.setOnClickListener {
+            startActivity(Intent(this@SymptomActivity, DashboardActivity::class.java))
+        }
+
+        //bottom navigation bar: profile
+        btnProfile.setOnClickListener {
+            startActivity(Intent(this@SymptomActivity, ProfileActivity::class.java))
+        }
 
         val db = AppDatabase.getInstance(this)
         

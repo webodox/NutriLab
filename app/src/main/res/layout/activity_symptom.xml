@@ -56,4 +56,33 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="30dp"/>
 
+    <LinearLayout
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#FF6750A4"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/homebutton"
+            android:layout_width="218dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/home_svgrepo_com"
+            app:tint="#CBF8F4F4" />
+
+        <ImageView
+            android:id="@+id/profilebutton"
+            android:layout_width="208dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/profile_round_1342_svgrepo_com"
+            app:tint="#CBF8F4F4" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

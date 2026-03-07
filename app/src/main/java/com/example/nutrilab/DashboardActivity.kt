@@ -3,6 +3,7 @@ package com.example.nutrilab
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -31,6 +32,8 @@ class DashboardActivity : AppCompatActivity() {
         val btnLogout = findViewById<Button>(R.id.btnLogout)
         val btnSymptoms = findViewById<Button>(R.id.btnSymptoms)
         val btnSearch = findViewById<Button>(R.id.btnSearch)
+        val btnHome= findViewById<ImageView>(R.id.homebutton)
+        val btnProfile = findViewById<ImageView>(R.id.profilebutton)
 
         txtWelcome.text = "Welcome!"
 
@@ -42,6 +45,17 @@ class DashboardActivity : AppCompatActivity() {
         btnSearch.setOnClickListener {
             startActivity(Intent(this@DashboardActivity, SearchActivity::class.java))
         }
+
+        //bottom navigation bar: dashboard
+        btnHome.setOnClickListener {
+            startActivity(Intent(this@DashboardActivity, DashboardActivity::class.java))
+        }
+
+        //bottom navigation bar: profile
+        btnProfile.setOnClickListener {
+            startActivity(Intent(this@DashboardActivity, ProfileActivity::class.java))
+        }
+
         /*val db = AppDatabase.getInstance(this)
         val db = AppDatabase.getInstance(this)
         val repo = AuthRepository(db.userDao(), db.sessionDao())

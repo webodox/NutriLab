@@ -17,7 +17,7 @@ object SymptomRepository {
                 hashMapOf(
                     "userId" to log.userId,
                     "symptoms" to log.symptoms,
-                    "timestamp" to FieldValue.serverTimestamp() // better than phone time
+                    "timestamp" to FieldValue.serverTimestamp()
                 )
             )
             .addOnSuccessListener { onSuccess() }

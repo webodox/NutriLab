@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.nutrilab.data.entity.SymptomLogEntity
 import com.example.nutrilab.data.repository.SymptomRepository
+import com.google.firebase.auth.FirebaseAuth
 
 class SymptomActivity : AppCompatActivity() {
 
@@ -30,8 +31,13 @@ class SymptomActivity : AppCompatActivity() {
         btnNausea.setOnClickListener { toggle("Nausea") }
 
         btnSubmit.setOnClickListener {
-            // TODO: replace with real logged-in userId from your session
-            val userId = "testUser123"
+
+            val userId = FirebaseAuth.getInstance().currentUser?.uid
+
+            if (userId == null) {
+                Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             if (selectedSymptoms.isEmpty()) {
                 Toast.makeText(this, "Select at least one symptom", Toast.LENGTH_SHORT).show()

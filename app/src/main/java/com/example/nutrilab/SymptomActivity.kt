@@ -48,6 +48,7 @@ class SymptomActivity : AppCompatActivity() {
                 onSuccess = {
                     Toast.makeText(this, "Symptoms saved!", Toast.LENGTH_SHORT).show()
                     selectedSymptoms.clear()
+                    finish()
                 },
                 onError = { e ->
                     Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_LONG).show()

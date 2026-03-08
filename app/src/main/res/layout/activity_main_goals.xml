@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAFAFA"
+    tools:context=".MainGoals">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint3"
+        android:layout_width="match_parent"
+        android:layout_height="115dp">
+
+        <TextView
+            android:id="@+id/pageTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="55dp"
+            android:text="What are your targets?"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/limitTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="(Select up to three.)"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="@id/pageTitle"
+            app:layout_constraintTop_toTopOf="@id/pageTitle" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/layout5"
+        android:layout_width="395dp"
+        android:layout_height="150dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/constraint3"
+        tools:layout_editor_absoluteX="-2dp"
+        tools:layout_editor_absoluteY="130dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button20"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/grid_goal"
+            android:drawablePadding="20dp"
+            android:paddingStart="20dp"
+            android:text="Lose Weight"
+            android:textColor="#000000"
+            android:textSize="10sp"
+            android:gravity="center|bottom"
+            app:backgroundTint="@null"
+            app:icon="@drawable/dumbbell_gym_svgrepo_com"
+            app:iconSize="35sp"
+            app:iconPadding="-10dp"
+            app:iconGravity="textTop"
+            app:iconTint="@null" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button21"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/grid_goal"
+            android:drawablePadding="20dp"
+            android:paddingStart="20dp"
+            android:text="Gain Muscle"
+            android:textColor="#000000"
+            android:textSize="10sp"
+            android:gravity="center|bottom"
+            app:backgroundTint="@null"
+            app:icon="@drawable/flexed_biceps_medium_light_skin_tone_svgrepo_com"
+            app:iconSize="35sp"
+            app:iconPadding="-10dp"
+            app:iconGravity="textTop"
+            app:iconTint="@null" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout6"
+        android:layout_width="395dp"
+        android:layout_height="150dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/layout5">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button22"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/grid_goal"
+            android:drawablePadding="20dp"
+            android:paddingStart="20dp"
+            android:text="Lower Sodium"
+            android:textColor="#000000"
+            android:textSize="10sp"
+            android:gravity="center|bottom"
+            app:backgroundTint="@null"
+            app:icon="@drawable/vegetables_food_svgrepo_com"
+            app:iconSize="35sp"
+            app:iconPadding="-10dp"
+            app:iconGravity="textTop"
+            app:iconTint="@null" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button23"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/grid_goal"
+            android:drawablePadding="20dp"
+            android:paddingStart="20dp"
+            android:text="Manage IBS"
+            android:textColor="#000000"
+            android:textSize="10sp"
+            android:gravity="center|bottom"
+            app:backgroundTint="@null"
+            app:icon="@drawable/stomach_4_svgrepo_com"
+            app:iconSize="35sp"
+            app:iconPadding="-10dp"
+            app:iconGravity="textTop"
+            app:iconTint="@null" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout7"
+        android:layout_width="395dp"
+        android:layout_height="150dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/layout6"
+        tools:layout_editor_absoluteX="-2dp"
+        tools:layout_editor_absoluteY="130dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button24"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/grid_goal"
+            android:drawablePadding="20dp"
+            android:paddingStart="20dp"
+            android:text="Lower Cholesterol"
+            android:textColor="#000000"
+            android:textSize="10sp"
+            android:gravity="center|bottom"
+            app:backgroundTint="@null"
+            app:icon="@drawable/cholesterol_svgrepo_com"
+            app:iconSize="35sp"
+            app:iconPadding="-10dp"
+            app:iconGravity="textTop"
+            app:iconTint="@null" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button25"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/grid_goal"
+            android:drawablePadding="20dp"
+            android:paddingStart="20dp"
+            android:text="Increase Fiber"
+            android:textColor="#000000"
+            android:textSize="10sp"
+            android:gravity="center|bottom"
+            app:backgroundTint="@null"
+            app:icon="@drawable/organic_nutrition_svgrepo_com"
+            app:iconSize="35sp"
+            app:iconPadding="-10dp"
+            app:iconGravity="textTop"
+            app:iconTint="@null" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout8"
+        android:layout_width="395dp"
+        android:layout_height="150dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/layout7"
+        tools:layout_editor_absoluteX="-2dp"
+        tools:layout_editor_absoluteY="130dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button26"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/grid_goal"
+            android:drawablePadding="20dp"
+            android:paddingStart="20dp"
+            android:text="Blood Pressure"
+            android:textColor="#000000"
+            android:textSize="10sp"
+            android:gravity="center|bottom"
+            app:backgroundTint="@null"
+            app:icon="@drawable/blood_pressure_gauge_svgrepo_com"
+            app:iconSize="35sp"
+            app:iconPadding="-10dp"
+            app:iconGravity="textTop"
+            app:iconTint="@null" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button27"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/grid_goal"
+            android:drawablePadding="20dp"
+            android:paddingStart="20dp"
+            android:text="Manage Diabetes"
+            android:textColor="#000000"
+            android:textSize="10sp"
+            android:gravity="center|bottom"
+            app:backgroundTint="@null"
+            app:icon="@drawable/diabetes_measure_svgrepo_com"
+            app:iconSize="40sp"
+            app:iconPadding="-10dp"
+            app:iconGravity="textTop"
+            app:iconTint="@null" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/submitBtn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout8"
+
+        >
+    </Button>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

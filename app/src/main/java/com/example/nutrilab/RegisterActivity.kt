@@ -83,7 +83,7 @@ class RegisterActivity : AppCompatActivity() {
                                 "Account created! Login now.",
                                 Toast.LENGTH_SHORT
                             ).show()
-                            startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
+                            startActivity(Intent(this@RegisterActivity, MainGoals::class.java))
                             finish()
                         }
                 }

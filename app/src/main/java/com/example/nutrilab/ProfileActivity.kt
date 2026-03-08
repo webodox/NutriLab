@@ -9,6 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import android.widget.TextView
 import android.widget.ImageView
+import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -17,12 +18,6 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_profile)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-
-        }
 
         //bottom navigation bar: dashboard
         val btnHome= findViewById<ImageView>(R.id.homebutton)
@@ -34,6 +29,11 @@ class ProfileActivity : AppCompatActivity() {
         val btnProfile = findViewById<ImageView>(R.id.profilebutton)
         btnProfile.setOnClickListener {
             startActivity(Intent(this@ProfileActivity, ProfileActivity::class.java))
+        }
+
+        val btnUpdateProfile = findViewById<MaterialButton>(R.id.button8)
+        btnUpdateProfile.setOnClickListener {
+            startActivity(Intent(this@ProfileActivity, EditProfile::class.java))
         }
 
         //user first name on profile

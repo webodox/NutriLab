@@ -36,6 +36,13 @@ class ProfileActivity : AppCompatActivity() {
             startActivity(Intent(this@ProfileActivity, EditProfile::class.java))
         }
 
+        val btnLogOutProfile = findViewById<MaterialButton>(R.id.button10)
+        btnLogOutProfile.setOnClickListener {
+        FirebaseAuth.getInstance().signOut()
+        startActivity(Intent(this@ProfileActivity, MainActivity::class.java))
+        finish()
+        }
+
         //user first name on profile
         val firstNameText = findViewById<TextView>(R.id.firstNameText)
         val userId = FirebaseAuth.getInstance().currentUser?. uid ?:return

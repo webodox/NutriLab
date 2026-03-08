@@ -29,7 +29,6 @@ class EditProfile : AppCompatActivity() {
         val userId = FirebaseAuth.getInstance().currentUser?. uid ?:return
         val updateFirstName = findViewById<EditText>(R.id.updateFirstName)
         val updateLastName = findViewById<EditText>(R.id.updateLastName)
-        val updateEmail = findViewById<EditText>(R.id.updateEmail)
         val btnProfileUpdate = findViewById<Button>(R.id.btnProfileUpdate)
 
         FirebaseFirestore.getInstance()
@@ -39,14 +38,12 @@ class EditProfile : AppCompatActivity() {
             .addOnSuccessListener { document ->
                 updateFirstName.setText(document.getString("firstName"))
                 updateLastName.setText(document.getString("lastName"))
-                updateEmail.setText(document.getString("email"))
             }
 
         btnProfileUpdate.setOnClickListener{
             val updated = hashMapOf(
                 "firstName" to updateFirstName.text.toString().trim(),
-                "lastName" to updateLastName.text.toString().trim(),
-                "email" to updateEmail.text.toString().trim()
+                "lastName" to updateLastName.text.toString().trim()
             )
             FirebaseFirestore.getInstance()
                 .collection("users")

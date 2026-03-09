@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/addFoodTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Food"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="16dp"/>
+
+        <!-- Food Name -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Food Name *"
+            android:textSize="16sp"/>
+        <EditText
+            android:id="@+id/foodNameEdit"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Enter food name"
+            android:inputType="textPersonName"
+            android:padding="8dp"
+            android:background="@android:drawable/edit_text"/>
+
+        <!-- Calories -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calories *"
+            android:textSize="16sp"
+            android:paddingTop="12dp"/>
+        <EditText
+            android:id="@+id/caloriesEdit"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Enter calories"
+            android:inputType="number"
+            android:padding="8dp"
+            android:background="@android:drawable/edit_text"/>
+
+        <!-- Protein -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Protein (g)"
+            android:textSize="16sp"
+            android:paddingTop="12dp"/>
+        <EditText
+            android:id="@+id/proteinEdit"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Enter protein"
+            android:inputType="numberDecimal"
+            android:padding="8dp"
+            android:background="@android:drawable/edit_text"/>
+
+        <!-- Carbs -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Carbs (g)"
+            android:textSize="16sp"
+            android:paddingTop="12dp"/>
+        <EditText
+            android:id="@+id/carbsEdit"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Enter carbs"
+            android:inputType="numberDecimal"
+            android:padding="8dp"
+            android:background="@android:drawable/edit_text"/>
+
+        <!-- Fat -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fat (g)"
+            android:textSize="16sp"
+            android:paddingTop="12dp"/>
+        <EditText
+            android:id="@+id/fatEdit"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Enter fat"
+            android:inputType="numberDecimal"
+            android:padding="8dp"
+            android:background="@android:drawable/edit_text"/>
+
+        <!-- Add Food Button -->
+        <Button
+            android:id="@+id/addButton"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Add Food"
+            android:layout_marginTop="24dp"/>
+
+    </LinearLayout>
+</ScrollView>

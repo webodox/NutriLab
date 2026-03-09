@@ -28,7 +28,7 @@ class SearchActivity : AppCompatActivity() {
 
         searchButton.setOnClickListener {
 
-            val foodName = searchBar.text.toString().trim()
+            val foodName = searchBar.text.toString().trim().lowercase()
 
             if (foodName.isEmpty()) {
                 Toast.makeText(this, "Enter a food name", Toast.LENGTH_SHORT).show()
@@ -63,6 +63,30 @@ class SearchActivity : AppCompatActivity() {
 
             if (selectedFood == "No Results Found") return@setOnItemClickListener
 
+            db.collection("foods")
+                .whereEqualTo("name", selectedFood)
+                .get()
+                .addOnSuccessListener { documents ->
+                    for (doc in documents) {
+                        val calories = doc.getLong("calories")?.toInt() ?: 0
+                        val protein = doc.getDouble("protein")?.toFloat() ?: 0f
+                        val carbs = doc.getDouble("carbs")?.toFloat() ?: 0f
+                        val fat = doc.getDouble("fat")?.toFloat() ?: 0f
+
+                        val foodItem = FoodItem(
+                            name = selectedFood,
+                            calories = calories,
+                            protein = protein,
+                            carbs = carbs,
+                            fat = fat
+                        )
+
+                        // Return FoodItem to previous activity (MealTrackingActivity)
+                        val resultIntent = Intent()
+                        resultIntent.putExtra("newFood", foodItem)
+                        setResult(RESULT_OK, resultIntent)
+                    }
+                }
             val intent = Intent(this, NutritionActivity::class.java)
             intent.putExtra("foodName", selectedFood)
             startActivity(intent)

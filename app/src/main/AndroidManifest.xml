@@ -24,6 +24,12 @@
             android:name=".DashboardActivity"
             android:exported="false" />
         <activity
+            android:name=".MealTrackingActivity"
+            />
+        <activity
+            android:name=".AddFoodActivity"
+            />
+        <activity
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity

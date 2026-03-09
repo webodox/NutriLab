@@ -21,7 +21,7 @@ class DashboardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_dashboard)
-
+0
 
         val txtWelcome = findViewById<TextView>(R.id.txtWelcome)
         val btnLogout = findViewById<Button>(R.id.btnLogout)
@@ -29,6 +29,7 @@ class DashboardActivity : AppCompatActivity() {
         val btnSearch = findViewById<Button>(R.id.btnSearch)
         val btnHome= findViewById<ImageView>(R.id.homebutton)
         val btnProfile = findViewById<ImageView>(R.id.profilebutton)
+        val btnMealTracking = findViewById<Button>(R.id.btnMealTracking)
 
         txtWelcome.text = "Welcome!"
 
@@ -44,6 +45,10 @@ class DashboardActivity : AppCompatActivity() {
         //bottom navigation bar: dashboard
         btnHome.setOnClickListener {
             startActivity(Intent(this@DashboardActivity, DashboardActivity::class.java))
+        }
+
+        btnMealTracking.setOnClickListener {
+            startActivity(Intent(this@DashboardActivity, MealTrackingActivity::class.java))
         }
 
         //bottom navigation bar: profile

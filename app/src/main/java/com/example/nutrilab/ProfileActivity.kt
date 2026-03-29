@@ -5,8 +5,6 @@ import android.widget.Button
 import android.content.Intent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import android.widget.TextView
 import android.widget.ImageView
 import com.google.android.material.button.MaterialButton
@@ -19,13 +17,11 @@ class ProfileActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_profile)
 
-        //bottom navigation bar: dashboard
-        val btnHome= findViewById<ImageView>(R.id.homebutton)
+        val btnHome = findViewById<ImageView>(R.id.homebutton)
         btnHome.setOnClickListener {
             startActivity(Intent(this@ProfileActivity, DashboardActivity::class.java))
         }
 
-        //bottom navigation bar: profile
         val btnProfile = findViewById<ImageView>(R.id.profilebutton)
         btnProfile.setOnClickListener {
             startActivity(Intent(this@ProfileActivity, ProfileActivity::class.java))
@@ -36,16 +32,20 @@ class ProfileActivity : AppCompatActivity() {
             startActivity(Intent(this@ProfileActivity, EditProfile::class.java))
         }
 
-        val btnLogOutProfile = findViewById<MaterialButton>(R.id.button10)
-        btnLogOutProfile.setOnClickListener {
-        FirebaseAuth.getInstance().signOut()
-        startActivity(Intent(this@ProfileActivity, MainActivity::class.java))
-        finish()
+        val btnHelpSupport = findViewById<MaterialButton>(R.id.button9)
+        btnHelpSupport.setOnClickListener {
+            startActivity(Intent(this@ProfileActivity, ChatbotActivity::class.java))
         }
 
-        //user first name on profile
+        val btnLogOutProfile = findViewById<MaterialButton>(R.id.button10)
+        btnLogOutProfile.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            startActivity(Intent(this@ProfileActivity, MainActivity::class.java))
+            finish()
+        }
+
         val firstNameText = findViewById<TextView>(R.id.firstNameText)
-        val userId = FirebaseAuth.getInstance().currentUser?. uid ?:return
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
 
         FirebaseFirestore.getInstance()
             .collection("users")

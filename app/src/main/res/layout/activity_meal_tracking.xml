@@ -86,6 +86,16 @@
             android:layout_height="wrap_content"
             android:text="Fat: 0g"
             android:textSize="16sp"/>
+
     </LinearLayout>
+
+    <!-- Submit Meal Button -->
+    <Button
+        android:id="@+id/submitMealButton"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:text="Submit Meal"
+        android:backgroundTint="#6650A4"/>
 
 </LinearLayout>

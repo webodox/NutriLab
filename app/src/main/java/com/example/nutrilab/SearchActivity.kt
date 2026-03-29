@@ -5,6 +5,11 @@ import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
+import org.json.JSONObject
+import java.net.HttpURLConnection
+import java.net.URL
+import java.net.URLEncoder
+import kotlin.concurrent.thread
 
 class SearchActivity : AppCompatActivity() {
 
@@ -14,6 +19,7 @@ class SearchActivity : AppCompatActivity() {
 
     private val db = FirebaseFirestore.getInstance()
     private val foodResults = ArrayList<String>()
+    private val foodItemCache = ArrayList<FoodItem>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,69 +33,112 @@ class SearchActivity : AppCompatActivity() {
         resultsList.adapter = adapter
 
         searchButton.setOnClickListener {
-
-            val foodName = searchBar.text.toString().trim().lowercase()
+            val foodName = searchBar.text.toString().trim()
 
             if (foodName.isEmpty()) {
                 Toast.makeText(this, "Enter a food name", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            db.collection("foods")
-                .whereEqualTo("name", foodName)
-                .get()
-                .addOnSuccessListener { documents ->
+            foodResults.clear()
+            foodItemCache.clear()
+            foodResults.add("Searching...")
+            adapter.notifyDataSetChanged()
 
-                    foodResults.clear()
+            // Search Open Food Facts API on background thread
+            thread {
+                try {
+                    val encoded = URLEncoder.encode(foodName, "UTF-8")
+                    val url = URL("https://world.openfoodfacts.org/cgi/search.pl?search_terms=$encoded&search_simple=1&action=process&json=1&page_size=20")
+                    val connection = url.openConnection() as HttpURLConnection
+                    connection.requestMethod = "GET"
+                    connection.setRequestProperty("User-Agent", "NutriLab/1.0")
+                    connection.connectTimeout = 5000
+                    connection.readTimeout = 5000
 
-                    if (documents.isEmpty) {
-                        foodResults.add("No Results Found")
-                    } else {
-                        for (doc in documents) {
-                            val name = doc.getString("name")
-                            if (name != null) {
-                                foodResults.add(name)
-                            }
-                        }
+                    val response = connection.inputStream.bufferedReader().readText()
+                    val json = JSONObject(response)
+                    val products = json.getJSONArray("products")
+
+                    val tempFoods = ArrayList<FoodItem>()
+
+                    for (i in 0 until minOf(products.length(), 15)) {
+                        val product = products.getJSONObject(i)
+                        val name = product.optString("product_name", "").trim()
+                        if (name.isEmpty()) continue
+
+                        val nutrients = product.optJSONObject("nutriments")
+                        val calories = nutrients?.optDouble("energy-kcal_100g", 0.0)?.toInt() ?: 0
+                        val protein = nutrients?.optDouble("proteins_100g", 0.0)?.toFloat() ?: 0f
+                        val carbs = nutrients?.optDouble("carbohydrates_100g", 0.0)?.toFloat() ?: 0f
+                        val fat = nutrients?.optDouble("fat_100g", 0.0)?.toFloat() ?: 0f
+
+                        tempFoods.add(FoodItem(name, calories, protein, carbs, fat))
                     }
 
-                    adapter.notifyDataSetChanged()
+                    runOnUiThread {
+                        foodResults.clear()
+                        foodItemCache.clear()
+
+                        if (tempFoods.isEmpty()) {
+                            foodResults.add("No Results Found")
+                        } else {
+                            for (food in tempFoods) {
+                                foodResults.add("${food.name} — ${food.calories} kcal")
+                                foodItemCache.add(food)
+                            }
+                        }
+                        adapter.notifyDataSetChanged()
+                    }
+
+                } catch (e: Exception) {
+                    // API failed — fall back to Firestore
+                    val foodNameLower = foodName.lowercase()
+                    db.collection("foods")
+                        .whereEqualTo("name", foodNameLower)
+                        .get()
+                        .addOnSuccessListener { documents ->
+                            foodResults.clear()
+                            foodItemCache.clear()
+
+                            if (documents.isEmpty) {
+                                foodResults.add("No Results Found")
+                            } else {
+                                for (doc in documents) {
+                                    val name = doc.getString("name") ?: continue
+                                    val calories = doc.getLong("calories")?.toInt() ?: 0
+                                    val protein = doc.getDouble("protein")?.toFloat() ?: 0f
+                                    val carbs = doc.getDouble("carbs")?.toFloat() ?: 0f
+                                    val fat = doc.getDouble("fat")?.toFloat() ?: 0f
+                                    foodResults.add("$name — $calories kcal")
+                                    foodItemCache.add(FoodItem(name, calories, protein, carbs, fat))
+                                }
+                            }
+                            adapter.notifyDataSetChanged()
+                        }
                 }
+            }
         }
 
         resultsList.setOnItemClickListener { _, _, position, _ ->
+            val selected = foodResults[position]
+            if (selected == "No Results Found" || selected == "Searching...") return@setOnItemClickListener
 
-            val selectedFood = foodResults[position]
+            if (position < foodItemCache.size) {
+                val foodItem = foodItemCache[position]
 
-            if (selectedFood == "No Results Found") return@setOnItemClickListener
+                val resultIntent = Intent()
+                resultIntent.putExtra("newFood", foodItem)
+                setResult(RESULT_OK, resultIntent)
 
-            db.collection("foods")
-                .whereEqualTo("name", selectedFood)
-                .get()
-                .addOnSuccessListener { documents ->
-                    for (doc in documents) {
-                        val calories = doc.getLong("calories")?.toInt() ?: 0
-                        val protein = doc.getDouble("protein")?.toFloat() ?: 0f
-                        val carbs = doc.getDouble("carbs")?.toFloat() ?: 0f
-                        val fat = doc.getDouble("fat")?.toFloat() ?: 0f
-
-                        val foodItem = FoodItem(
-                            name = selectedFood,
-                            calories = calories,
-                            protein = protein,
-                            carbs = carbs,
-                            fat = fat
-                        )
-
-                        // Return FoodItem to previous activity (MealTrackingActivity)
-                        val resultIntent = Intent()
-                        resultIntent.putExtra("newFood", foodItem)
-                        setResult(RESULT_OK, resultIntent)
-                    }
-                }
-            val intent = Intent(this, NutritionActivity::class.java)
-            intent.putExtra("foodName", selectedFood)
-            startActivity(intent)
+                val intent = Intent(this, NutritionActivity::class.java)
+                intent.putExtra("foodName", foodItem.name)
+                intent.putExtra("calories", foodItem.calories)
+                intent.putExtra("protein", foodItem.protein)
+                intent.putExtra("carbs", foodItem.carbs)
+                intent.putExtra("fat", foodItem.fat)
+                startActivity(intent)
+            }
         }
     }
 }

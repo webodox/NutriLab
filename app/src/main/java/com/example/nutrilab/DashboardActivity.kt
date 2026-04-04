@@ -26,6 +26,7 @@ class DashboardActivity : AppCompatActivity() {
         val btnChatbot = findViewById<Button>(R.id.btnChatbot)
         val btnWaterIntake = findViewById<Button>(R.id.btnWaterIntake)
         val btnNotifications = findViewById<Button>(R.id.btnNotifications)
+        val btnTracking = findViewById<Button>(R.id.btnTracking)
 
         txtWelcome.text = "Welcome!"
 
@@ -64,6 +65,11 @@ class DashboardActivity : AppCompatActivity() {
         btnLogout.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
             startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+
+        btnTracking.setOnClickListener {
+            startActivity(Intent(this, TrackingActivity::class.java))
             finish()
         }
     }

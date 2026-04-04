@@ -4,13 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
-import com.example.nutrilab.data.AppDatabase
-import com.example.nutrilab.data.repository.AuthRepository
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,19 +25,8 @@ class MainActivity : AppCompatActivity() {
         val editPassword = findViewById<EditText>(R.id.editPassword)
         val btnLogin = findViewById<Button>(R.id.btnLogin)
         val btnGoRegister = findViewById<Button>(R.id.btnGoRegister)
+        val txtForgotPassword = findViewById<TextView>(R.id.txtForgotPassword)
 
-        /*val db = AppDatabase.getInstance(this)
-        val repo = AuthRepository(db.userDao(), db.sessionDao())
-
-        / Auto-skip login if session exists
-        lifecycleScope.launch {
-            if (repo.hasActiveSession()) {
-                startActivity(Intent(this@MainActivity, DashboardActivity::class.java))
-                finish()
-            }
-        }*/
-
-        // LOGIN BUTTON
         btnLogin.setOnClickListener {
             val email = editEmail.text.toString().trim()
             val pass = editPassword.text.toString()
@@ -49,21 +35,6 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Enter email and password", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-
-            /*lifecycleScope.launch {
-                val result = repo.login(email, pass)
-                if (result.isSuccess) {
-                    Toast.makeText(this@MainActivity, "Login success", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this@MainActivity, DashboardActivity::class.java))
-                    finish()
-                } else {
-                    Toast.makeText(
-                        this@MainActivity,
-                        result.exceptionOrNull()?.message ?: "Login failed",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }*/
 
             FirebaseAuth.getInstance()
                 .signInWithEmailAndPassword(email, pass)
@@ -81,10 +52,35 @@ class MainActivity : AppCompatActivity() {
                 }
         }
 
-        // CREATE ACCOUNT BUTTON
         btnGoRegister.setOnClickListener {
             Toast.makeText(this, "Opening Register...", Toast.LENGTH_SHORT).show()
             startActivity(Intent(this, RegisterActivity::class.java))
+        }
+
+        txtForgotPassword.setOnClickListener {
+            val email = editEmail.text.toString().trim()
+
+            if (email.isBlank()) {
+                Toast.makeText(this, "Enter your email address first", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            FirebaseAuth.getInstance()
+                .sendPasswordResetEmail(email)
+                .addOnSuccessListener {
+                    Toast.makeText(
+                        this,
+                        "Password reset email sent! Check your inbox.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(
+                        this,
+                        e.message ?: "Failed to send reset email",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
         }
     }
 }

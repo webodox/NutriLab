@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="120dp" />
+        android:layout_marginTop="80dp" />
 
     <Button
         android:id="@+id/btnLogout"
@@ -27,7 +27,7 @@
         app:layout_constraintTop_toBottomOf="@id/txtWelcome"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="40dp" />
+        android:layout_marginTop="16dp" />
 
     <Button
         android:id="@+id/btnSymptoms"
@@ -37,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@id/btnLogout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="12dp" />
 
     <Button
         android:id="@+id/btnMealTracking"
@@ -47,7 +47,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnSymptoms"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="12dp" />
 
     <Button
         android:id="@+id/btnSearch"
@@ -57,7 +57,7 @@
         app:layout_constraintTop_toBottomOf="@id/btnMealTracking"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="12dp" />
 
     <Button
         android:id="@+id/btnChatbot"
@@ -68,7 +68,29 @@
         app:layout_constraintTop_toBottomOf="@id/btnSearch"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="12dp" />
+
+    <Button
+        android:id="@+id/btnWaterIntake"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:text="Water Intake"
+        android:backgroundTint="#6650A4"
+        app:layout_constraintTop_toBottomOf="@id/btnChatbot"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp" />
+
+    <Button
+        android:id="@+id/btnNotifications"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:text="Reminders"
+        android:backgroundTint="#6650A4"
+        app:layout_constraintTop_toBottomOf="@id/btnWaterIntake"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp" />
 
     <LinearLayout
         android:id="@+id/bottomNav"

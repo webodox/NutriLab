@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Notification Reminders"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="24dp"/>
+
+        <!-- Meal Reminders -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Meal Logging Reminder"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingBottom="8dp"/>
+
+        <Switch
+            android:id="@+id/mealToggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enable meal reminders"
+            android:paddingBottom="8dp"/>
+
+        <Spinner
+            android:id="@+id/mealPresetSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"/>
+
+        <Button
+            android:id="@+id/mealTimeButton"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Meal: 8:00 AM"
+            android:backgroundTint="#6650A4"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- Water Reminders -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Water Intake Reminder"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingBottom="8dp"/>
+
+        <Switch
+            android:id="@+id/waterToggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enable water reminders"
+            android:paddingBottom="8dp"/>
+
+        <Spinner
+            android:id="@+id/waterPresetSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"/>
+
+        <Button
+            android:id="@+id/waterTimeButton"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Water: 12:00 PM"
+            android:backgroundTint="#6650A4"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- Symptom Reminders -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Symptom Tracking Reminder"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingBottom="8dp"/>
+
+        <Switch
+            android:id="@+id/symptomToggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enable symptom reminders"
+            android:paddingBottom="8dp"/>
+
+        <Spinner
+            android:id="@+id/symptomPresetSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"/>
+
+        <Button
+            android:id="@+id/symptomTimeButton"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Symptoms: 8:00 PM"
+            android:backgroundTint="#6650A4"
+            android:layout_marginBottom="24dp"/>
+
+
+
+        <Button
+            android:id="@+id/saveNotifButton"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Save Reminders"
+            android:backgroundTint="#6650A4"/>
+
+    </LinearLayout>
+</ScrollView>

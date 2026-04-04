@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Water Intake"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="24dp"/>
+
+    <TextView
+        android:id="@+id/currentIntakeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Today's total: 0 oz"
+        android:textSize="18sp"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="32dp"/>
+
+    <EditText
+        android:id="@+id/waterAmountInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter amount in oz (e.g. 8)"
+        android:inputType="numberDecimal"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:id="@+id/submitWaterButton"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Log Water Intake"
+        android:backgroundTint="#6650A4"/>
+
+</LinearLayout>

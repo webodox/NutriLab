@@ -24,6 +24,8 @@ class DashboardActivity : AppCompatActivity() {
         val btnProfile = findViewById<ImageView>(R.id.profilebutton)
         val btnMealTracking = findViewById<Button>(R.id.btnMealTracking)
         val btnChatbot = findViewById<Button>(R.id.btnChatbot)
+        val btnWaterIntake = findViewById<Button>(R.id.btnWaterIntake)
+        val btnNotifications = findViewById<Button>(R.id.btnNotifications)
 
         txtWelcome.text = "Welcome!"
 
@@ -41,6 +43,14 @@ class DashboardActivity : AppCompatActivity() {
 
         btnChatbot.setOnClickListener {
             startActivity(Intent(this, ChatbotActivity::class.java))
+        }
+
+        btnWaterIntake.setOnClickListener {
+            startActivity(Intent(this, WaterIntakeActivity::class.java))
+        }
+
+        btnNotifications.setOnClickListener {
+            startActivity(Intent(this, NotificationSettingsActivity::class.java))
         }
 
         btnHome.setOnClickListener {

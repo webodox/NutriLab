@@ -19,6 +19,9 @@
         android:theme="@style/Theme.NutriLab"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".FeedbackActivity"
+            android:exported="false" />
+        <activity
             android:name=".TrackingActivity"
             android:exported="false" />
 

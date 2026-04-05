@@ -103,6 +103,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="12dp" />
 
+    <Button
+        android:id="@+id/btnFeedback"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:text="Feedback"
+        android:backgroundTint="#6650A4"
+        app:layout_constraintTop_toBottomOf="@id/btnTracking"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp" />
+
+
     <LinearLayout
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"

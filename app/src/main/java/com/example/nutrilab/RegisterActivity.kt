@@ -78,6 +78,7 @@ class RegisterActivity : AppCompatActivity() {
                         .document(userId)
                         .set(user)
                         .addOnSuccessListener {
+                            AchievementActivity.onAccountCreated(userId)
                             Toast.makeText(
                                 this@RegisterActivity,
                                 "Account created! Login now.",

@@ -123,6 +123,7 @@ class MealTrackingActivity : AppCompatActivity() {
         db.collection("mealLogs")
             .add(mealLog)
             .addOnSuccessListener {
+                AchievementActivity.onMealLogged(userId)
                 Toast.makeText(this, "Meal saved successfully!", Toast.LENGTH_SHORT).show()
                 selectedFoods.clear()
                 adapter.notifyDataSetChanged()

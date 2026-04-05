@@ -61,6 +61,9 @@
             android:name=".NotificationSettingsActivity"
             android:exported="false" />
         <activity
+            android:name=".BMICalculatorActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

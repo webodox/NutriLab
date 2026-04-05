@@ -17,6 +17,7 @@ class ProfileActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_profile)
 
+        //profile options
         val btnHome = findViewById<ImageView>(R.id.homebutton)
         btnHome.setOnClickListener {
             startActivity(Intent(this@ProfileActivity, DashboardActivity::class.java))
@@ -44,6 +45,8 @@ class ProfileActivity : AppCompatActivity() {
             finish()
         }
 
+
+        //first name display and achievements
         val firstNameText = findViewById<TextView>(R.id.firstNameText)
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
 
@@ -54,6 +57,16 @@ class ProfileActivity : AppCompatActivity() {
             .addOnSuccessListener { document ->
                 val firstName = document.getString("firstName") ?: ""
                 firstNameText.text = firstName
+
+                val badge = document.getString("badge") ?: "bronze"
+                val badgeImage = when (badge) {
+                    "silver" -> R.drawable.silv_badge
+                    "gold" -> R.drawable.gold_badge
+                    "platinum" -> R.drawable.plat_badge
+                    "diamond" -> R.drawable.diam_badge
+                    else -> R.drawable.bronz_badge
+                }
+                findViewById<ImageView>(R.id.achievementBadge).setImageResource(badgeImage)
             }
     }
 }

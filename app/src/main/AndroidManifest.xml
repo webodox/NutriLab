@@ -19,6 +19,18 @@
         android:theme="@style/Theme.NutriLab"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".MealPlanItem"
+            android:exported="false" />
+        <activity
+            android:name=".MealPlanFoodItem"
+            android:exported="false" />
+        <activity
+            android:name=".AddMealPlanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MealPlanActivity"
+            android:exported="false" />
+        <activity
             android:name=".AchievementActivity"
             android:exported="false" />
         <activity

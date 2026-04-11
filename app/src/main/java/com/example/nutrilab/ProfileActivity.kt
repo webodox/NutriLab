@@ -33,6 +33,10 @@ class ProfileActivity : AppCompatActivity() {
             startActivity(Intent(this@ProfileActivity, EditProfile::class.java))
         }
 
+        val btnMealPlan = findViewById<MaterialButton>(R.id.button7)
+        btnMealPlan.setOnClickListener {
+            startActivity(Intent(this@ProfileActivity, MealPlanActivity::class.java))
+        }
         val btnHelpSupport = findViewById<MaterialButton>(R.id.button9)
         btnHelpSupport.setOnClickListener {
             startActivity(Intent(this@ProfileActivity, ChatbotActivity::class.java))

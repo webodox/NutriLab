@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_marginTop="20dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/layout10">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/back_arrow_navigation_svgrepo_com"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="15dp"/>
+
+            <TextView
+                android:id="@+id/addMealPlanTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create Meal Plan"
+                android:textStyle="bold"
+                android:textSize="25dp"
+                android:textAlignment="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="30dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/layout10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="35dp">
+
+            <Button
+            android:id="@+id/btnStartDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start Date"
+            android:layout_marginEnd="8dp"/>
+
+            <Button
+                android:id="@+id/btnEndDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="End Date"/>
+        </LinearLayout>
+
+        <Spinner
+            android:id="@+id/spinnerMealType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"/>
+
+        <EditText
+            android:id="@+id/editFoodName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter food"
+            android:layout_marginTop="12dp"/>
+
+        <EditText
+            android:id="@+id/editFoodGrams"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter grams"
+            android:layout_marginTop="12dp"/>
+
+        <Button
+            android:id="@+id/btnAddFood"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:textSize="18dp"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/foodsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="12dp"/>
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Save Meal Plan"
+            android:layout_marginTop="18dp"
+            android:layout_gravity="center"/>
+
+
+    </LinearLayout>
+</ScrollView>

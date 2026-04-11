@@ -37,22 +37,6 @@
             app:iconSize="25sp"
             app:iconTint="#000000" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button6"
-            android:layout_width="match_parent"
-            android:layout_height="68dp"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/profilebtn"
-            android:drawablePadding="20dp"
-            android:paddingStart="20dp"
-            android:text="Goals"
-            android:textAlignment="textStart"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            app:backgroundTint="@null"
-            app:icon="@drawable/goal_svgrepo_com"
-            app:iconSize="25sp"
-            app:iconTint="#000000" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button7"
@@ -69,6 +53,23 @@
             app:backgroundTint="@null"
             app:icon="@drawable/meal_svgrepo_com"
             app:iconSize="30sp"
+            app:iconTint="#000000" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button6"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/profilebtn"
+            android:drawablePadding="20dp"
+            android:paddingStart="20dp"
+            android:text="Export Data"
+            android:textAlignment="textStart"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:backgroundTint="@null"
+            app:icon="@drawable/goal_svgrepo_com"
+            app:iconSize="25sp"
             app:iconTint="#000000" />
 
         <com.google.android.material.button.MaterialButton

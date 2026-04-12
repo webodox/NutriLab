@@ -25,7 +25,6 @@
             android:layout_marginStart="15dp"
             android:layout_marginBottom="15dp"/>
 
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,28 +41,134 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/currentIntakeText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Today's total: 0 oz"
-        android:textSize="18sp"
-        android:layout_gravity="center_horizontal"
-        android:paddingBottom="32dp"/>
-
-    <EditText
-        android:id="@+id/waterAmountInput"
+    <!-- Progress Card -->
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter amount in oz (e.g. 8)"
-        android:inputType="numberDecimal"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="24dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="#FFFFFF">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="💧"
+                    android:textSize="36sp"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="12dp">
+
+                    <TextView
+                        android:id="@+id/currentIntakeText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0 oz"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        android:textColor="#6650A4"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="of 64 oz daily goal"
+                        android:textSize="13sp"
+                        android:textColor="#888888"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/progressPercentText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0%"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#6650A4"/>
+
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/waterProgressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="16dp"
+                android:max="64"
+                android:progress="0"
+                android:progressTint="#6650A4"
+                android:progressBackgroundTint="#E0D9F5"/>
+
+            <TextView
+                android:id="@+id/goalStatusText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Keep going! Stay hydrated."
+                android:textSize="12sp"
+                android:textColor="#888888"
+                android:layout_marginTop="8dp"
+                android:layout_gravity="center_horizontal"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Input Card -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="#FFFFFF">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Log water intake"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#1C1B1F"
+                android:layout_marginBottom="12dp"/>
+
+            <EditText
+                android:id="@+id/waterAmountInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter amount in oz (e.g. 8)"
+                android:inputType="numberDecimal"
+                android:textSize="15sp"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/submitWaterButton"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="52dp"
         android:text="Log Water Intake"
+        android:textSize="16sp"
         android:backgroundTint="#6650A4"/>
 
 </LinearLayout>

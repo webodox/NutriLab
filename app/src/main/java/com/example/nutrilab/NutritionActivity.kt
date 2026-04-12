@@ -6,7 +6,6 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.firestore.FirebaseFirestore
 
 class NutritionActivity : AppCompatActivity() {
 
@@ -15,10 +14,7 @@ class NutritionActivity : AppCompatActivity() {
     private lateinit var proteinText: TextView
     private lateinit var carbsText: TextView
     private lateinit var fatText: TextView
-
     private lateinit var addToDailyTotalsButton: Button
-
-    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,50 +27,33 @@ class NutritionActivity : AppCompatActivity() {
         fatText = findViewById(R.id.fatText)
         addToDailyTotalsButton = findViewById(R.id.addToDailyTotalsButton)
 
-        addToDailyTotalsButton.setOnClickListener {
+        val foodName = intent.getStringExtra("foodName") ?: "Unknown"
+        val calories = intent.getIntExtra("calories", 0)
+        val protein = intent.getFloatExtra("protein", 0f)
+        val carbs = intent.getFloatExtra("carbs", 0f)
+        val fat = intent.getFloatExtra("fat", 0f)
 
-            // Build the FoodItem
+        nutritionTitle.text = foodName
+        caloriesText.text = "Calories: $calories"
+        proteinText.text = "Protein: ${protein}g"
+        carbsText.text = "Carbs: ${carbs}g"
+        fatText.text = "Fat: ${fat}g"
+
+        addToDailyTotalsButton.setOnClickListener {
             val foodItem = FoodItem(
-                name = nutritionTitle.text.toString(),
-                calories = caloriesText.text.toString().replace("Calories: ", "").toIntOrNull() ?: 0,
-                protein = proteinText.text.toString().replace("Protein: ", "").replace("g", "").toFloatOrNull() ?: 0f,
-                carbs = carbsText.text.toString().replace("Carbs: ", "").replace("g", "").toFloatOrNull() ?: 0f,
-                fat = fatText.text.toString().replace("Fat: ", "").replace("g", "").toFloatOrNull() ?: 0f
+                name = foodName,
+                calories = calories,
+                protein = protein,
+                carbs = carbs,
+                fat = fat
             )
 
-            // Send it back to MealTrackingActivity without closing the page
             val resultIntent = Intent()
             resultIntent.putExtra("newFood", foodItem)
             setResult(RESULT_OK, resultIntent)
 
-            Toast.makeText(this, "${foodItem.name} added to daily totals!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "$foodName added to daily totals!", Toast.LENGTH_SHORT).show()
             finish()
         }
-
-        val foodName = intent.getStringExtra("foodName")
-        nutritionTitle.text = foodName
-
-        if (foodName != null) {
-            fetchNutritionData(foodName)
-        }
-    }
-
-    private fun fetchNutritionData(foodName: String) {
-        db.collection("foods")
-            .whereEqualTo("name", foodName)
-            .get()
-            .addOnSuccessListener { documents ->
-                for (doc in documents) {
-                    val calories = doc.getLong("calories") ?: 0
-                    val protein = doc.getLong("protein") ?: 0
-                    val carbs = doc.getLong("carbs") ?: 0
-                    val fat = doc.getLong("fat") ?: 0
-
-                    caloriesText.text = "Calories: $calories"
-                    proteinText.text = "Protein: ${protein}g"
-                    carbsText.text = "Carbs: ${carbs}g"
-                    fatText.text = "Fat: ${fat}g"
-                }
-            }
     }
 }

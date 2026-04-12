@@ -1,7 +1,9 @@
 package com.example.nutrilab
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.nutrilab.data.entity.SymptomLogEntity
@@ -24,6 +26,12 @@ class SymptomActivity : AppCompatActivity() {
         fun toggle(symptom: String) {
             if (selectedSymptoms.contains(symptom)) selectedSymptoms.remove(symptom)
             else selectedSymptoms.add(symptom)
+        }
+
+        //back button
+        val btnBack = findViewById<ImageView>(R.id.btnBack)
+        btnBack.setOnClickListener {
+            startActivity(Intent(this@SymptomActivity, DashboardActivity::class.java))
         }
 
         btnHeadache.setOnClickListener { toggle("Headache") }

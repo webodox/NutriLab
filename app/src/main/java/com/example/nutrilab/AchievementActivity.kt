@@ -1,17 +1,14 @@
 package com.example.nutrilab
 
-import android.os.Bundle
+
 import android.util.Log
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import android.widget.Toast
+import android.content.Context
 import com.google.firebase.Timestamp
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
-import java.sql.Time
 
+//tracking achievements -mati sawadogo
 object AchievementActivity {
     private val db = FirebaseFirestore.getInstance()
 
@@ -25,6 +22,7 @@ object AchievementActivity {
         }
     }
 
+    //update achievements everytime user logs a meal
     private fun updateAchievement(userId: String, points: Int, badge: String) {
         db.collection("achievements").document(userId)
             .set(
@@ -41,6 +39,7 @@ object AchievementActivity {
             }
     }
 
+    //+100 achievement points for creating an account
     fun onAccountCreated(userId: String) {
         db.collection("users").document(userId)
             .set(
@@ -54,7 +53,8 @@ object AchievementActivity {
         updateAchievement(userId, 100, getBadge(100))
     }
 
-    fun onMealLogged(userId: String) {
+    //achievement points for logging a meal
+    fun onMealLogged(context: Context, userId: String) {
         val userRef = db.collection("users").document(userId)
         val achievementRef = db.collection("achievements").document(userId)
 
@@ -89,6 +89,9 @@ object AchievementActivity {
         }
         .addOnSuccessListener { (newPoints, newBadge, pointsToAdd) ->
         Log.d("AchievementActivity", "Meal logged. Points: $newPoints, Awarded: $pointsToAdd, Badge: $newBadge")
+            if (pointsToAdd > 0) {
+                Toast.makeText(context,"+$pointsToAdd points!", Toast.LENGTH_SHORT).show()
+            }
         }
         .addOnFailureListener { e ->
             Log.e("AchievementActivity", "Failed to log meal points.", e)

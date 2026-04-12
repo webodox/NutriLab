@@ -1,14 +1,13 @@
 package com.example.nutrilab
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
 
+//tracking logs display with calendar -mati sawadogo
 class TrackingActivity : AppCompatActivity() {
     private lateinit var calendarStrip: LinearLayout
     private lateinit var mealsRecyclerView: RecyclerView
@@ -45,17 +45,26 @@ class TrackingActivity : AppCompatActivity() {
         setupCalendarStrip()
         loadMealsDate(selectedDate)
 
+        //back button
+        val btnBack = findViewById<ImageView>(R.id.btnBack)
+        btnBack.setOnClickListener {
+            startActivity(Intent(this@TrackingActivity, DashboardActivity::class.java))
+        }
+
+        //previous week back button
         findViewById<ImageButton>(R.id.btnPrevWeek).setOnClickListener {
             weekOffset--
             setupCalendarStrip()
         }
 
+        //next week back button
         findViewById<ImageButton>(R.id.btnNextWeek).setOnClickListener {
             weekOffset++
             setupCalendarStrip()
         }
     }
 
+    //calendar weekly view
     private fun setupCalendarStrip() {
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY)
@@ -99,6 +108,7 @@ class TrackingActivity : AppCompatActivity() {
         }
     }
 
+    //display meals, date logged, and macronutrients
     private fun loadMealsDate(date: Date) {
         val userId = auth.currentUser?.uid
 
@@ -116,6 +126,7 @@ class TrackingActivity : AppCompatActivity() {
             set(Calendar.SECOND, 59)
         }.time
 
+        //get meals logged
         db.collection("mealLogs")
             .whereEqualTo("userId", userId)
             .whereGreaterThanOrEqualTo("timestamp", com.google.firebase.Timestamp(startOfDay))
@@ -140,6 +151,7 @@ class TrackingActivity : AppCompatActivity() {
             }
     }
 
+    //display symptoms
     private fun loadSymptomsDate(date: Date) {
         val userId = auth.currentUser?.uid
 
@@ -157,6 +169,7 @@ class TrackingActivity : AppCompatActivity() {
             set(Calendar.SECOND, 59)
         }.time
 
+        //get symptoms logged
         db.collection("symptom_logs")
             .whereEqualTo("userId", userId)
             .whereGreaterThanOrEqualTo("timestamp", com.google.firebase.Timestamp(startOfDay))
@@ -179,7 +192,7 @@ class TrackingActivity : AppCompatActivity() {
     }
 }
 
-
+//display logged meals and symptoms to view
 data class MealLogItem(val name: String, val calories: Int, val carbs: Int, val fat: Int, val protein: Int, val timestamp: Date)
 class MealLogAdapter(private val meals: List<MealLogItem>) :
         RecyclerView.Adapter<MealLogAdapter.ViewHolder>() {

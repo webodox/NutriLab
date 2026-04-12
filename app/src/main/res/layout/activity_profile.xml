@@ -18,7 +18,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/bottomNav"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstNameText">
+        app:layout_constraintTop_toBottomOf="@+id/nameAndBadge">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button8"
@@ -68,8 +68,8 @@
             android:textColor="#000000"
             android:textSize="16sp"
             app:backgroundTint="@null"
-            app:icon="@drawable/goal_svgrepo_com"
-            app:iconSize="25sp"
+            app:icon="@drawable/share_apple_svgrepo_com"
+            app:iconSize="30sp"
             app:iconTint="#000000" />
 
         <com.google.android.material.button.MaterialButton
@@ -160,28 +160,27 @@
         android:layout_height="60dp"
         android:background="#FF6750A4"
         android:orientation="horizontal"
-        android:paddingBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
             android:id="@+id/homebutton"
-            android:layout_width="218dp"
-            android:layout_height="35dp"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             app:srcCompat="@drawable/home_svgrepo_com"
-            app:tint="#CBF8F4F4" />
+            app:tint="#CBF8F4F4"/>
 
         <ImageView
             android:id="@+id/profilebutton"
-            android:layout_width="208dp"
-            android:layout_height="35dp"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            app:srcCompat="@drawable/profile_round_1342_svgrepo_com"
-            app:tint="#CBF8F4F4" />
+            app:srcCompat="@drawable/profile_svgrepo_com"
+            app:tint="#CBF8F4F4"/>
 
     </LinearLayout>
 

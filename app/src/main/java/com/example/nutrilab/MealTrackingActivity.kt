@@ -54,6 +54,11 @@ class MealTrackingActivity : AppCompatActivity() {
         submitMealButton.setOnClickListener {
             saveMealToFirestore()
         }
+
+        val btnBack = findViewById<ImageView>(R.id.btnBack)
+        btnBack.setOnClickListener {
+            startActivity(Intent(this@MealTrackingActivity, DashboardActivity::class.java))
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -123,7 +128,7 @@ class MealTrackingActivity : AppCompatActivity() {
         db.collection("mealLogs")
             .add(mealLog)
             .addOnSuccessListener {
-                AchievementActivity.onMealLogged(userId)
+                AchievementActivity.onMealLogged(this, userId)
                 Toast.makeText(this, "Meal saved successfully!", Toast.LENGTH_SHORT).show()
                 selectedFoods.clear()
                 adapter.notifyDataSetChanged()

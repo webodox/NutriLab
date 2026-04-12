@@ -1,27 +1,21 @@
 package com.example.nutrilab
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageButton
-import android.widget.LinearLayout
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import java.text.SimpleDateFormat
-import java.util.*
 import android.content.Intent
-import android.view.*
 import android.widget.*
 
+//display for all the meal plans the user has created -mati sawadogo
 class MealPlanActivity : AppCompatActivity() {
     private lateinit var mealPlansRecyclerView: RecyclerView
     private val db = FirebaseFirestore.getInstance()
@@ -34,16 +28,19 @@ class MealPlanActivity : AppCompatActivity() {
         mealPlansRecyclerView = findViewById(R.id.mealPlansRecyclerView)
         mealPlansRecyclerView.layoutManager= LinearLayoutManager(this)
 
+        //back button
         val btnBack = findViewById<ImageView>(R.id.btnBack)
         btnBack.setOnClickListener {
             finish()
         }
 
+        //add meal plan button
         findViewById<Button>(R.id.btnAddMealPlan)
             .setOnClickListener {
                 startActivity(Intent(this, AddMealPlanActivity::class.java))
             }
 
+        //display meals
         loadMealPlans()
     }
 
@@ -51,6 +48,8 @@ class MealPlanActivity : AppCompatActivity() {
         super.onResume()
         loadMealPlans()
     }
+
+    //load meal plan contents
     private fun loadMealPlans() {
         val userId = auth.currentUser?.uid ?: return
 
@@ -99,13 +98,14 @@ class MealPlanActivity : AppCompatActivity() {
 
 }
 
+//adapter for displaying all meal plans
 class MealPlanAdapter(private val plans: List<MealPlanItem>, private val onEdit: (MealPlanItem) -> Unit, private val onDelete: (String) -> Unit) :
     RecyclerView.Adapter<MealPlanAdapter.ViewHolder>(){
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val txtMealType : TextView = view.findViewById(R.id.txtMealType)
         val txtFoods: TextView = view.findViewById(R.id.txtFoods)
-        val btnEdit : Button = view.findViewById(R.id.btnEdit)
-        val btnDelete : Button = view.findViewById(R.id.btnDelete)
+        val btnEdit : ImageView = view.findViewById(R.id.btnEdit)
+        val btnDelete : ImageView = view.findViewById(R.id.btnDelete)
 
     }
 

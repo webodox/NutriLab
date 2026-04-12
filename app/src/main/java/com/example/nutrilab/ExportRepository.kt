@@ -3,7 +3,7 @@ package com.example.nutrilab
 
 import com.google.firebase.firestore.FirebaseFirestore
 
-//set up for .txt file of data
+//set up for .txt file of data -mati sawadogo
 class ExportRepository {
     private val db = FirebaseFirestore.getInstance()
 
@@ -37,7 +37,11 @@ class ExportRepository {
     }
 
     //meal tracking history
-    private fun exportMealTracking(userId: String, result: StringBuilder, onComplete: (String) -> Unit) {
+    private fun exportMealTracking(
+        userId: String,
+        result: StringBuilder,
+        onComplete: (String) -> Unit
+    ) {
         db.collection("mealLogs")
             .whereEqualTo("userId", userId)
             .get()
@@ -64,7 +68,11 @@ class ExportRepository {
     }
 
     //water intake history
-    private fun exportWaterIntake(userId: String, result: StringBuilder, onComplete: (String) -> Unit) {
+    private fun exportWaterIntake(
+        userId: String,
+        result: StringBuilder,
+        onComplete: (String) -> Unit
+    ) {
         db.collection("waterLogs")
             .whereEqualTo("userId", userId)
             .get()
@@ -77,9 +85,35 @@ class ExportRepository {
                     result.append("\nDate: $date\n")
                     result.append("• ${amount} oz\n")
                 }
+                result.append("--------------------------------------------------------------------------------------\n")
+                exportSymptomTracking(userId, result, onComplete)
+            }
+    }
 
+    //symptom log history
+    private fun exportSymptomTracking(
+        userId: String,
+        result: StringBuilder,
+        onComplete: (String) -> Unit
+    ) {
+        db.collection("symptom_logs")
+            .whereEqualTo("userId", userId)
+            .get()
+            .addOnSuccessListener { symptom ->
+                result.append("    SYMPTOM TRACKING:    \n")
+
+                for (doc in symptom) {
+                    val symptoms = doc.get("symptoms") as? List<String> ?: emptyList()
+                    val date = doc.getDate("timestamp") ?: ""
+                    result.append("\nDate: $date\n")
+
+                    for (symptom in symptoms) {
+                        result.append("• ${symptom}\n")
+                    }
+                }
                 result.append("\n\n Export complete.")
                 onComplete(result.toString())
             }
     }
 }
+

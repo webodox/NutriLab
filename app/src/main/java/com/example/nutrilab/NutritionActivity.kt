@@ -3,6 +3,7 @@ package com.example.nutrilab
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -54,6 +55,12 @@ class NutritionActivity : AppCompatActivity() {
 
             Toast.makeText(this, "$foodName added to daily totals!", Toast.LENGTH_SHORT).show()
             finish()
+        }
+
+        //back button
+        val btnBack = findViewById<ImageView>(R.id.btnBack)
+        btnBack.setOnClickListener {
+            startActivity(Intent(this@NutritionActivity, SearchActivity::class.java))
         }
     }
 }

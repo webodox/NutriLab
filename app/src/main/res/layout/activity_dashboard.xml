@@ -417,8 +417,8 @@
 
         <ImageView
             android:id="@+id/homebutton"
-            android:layout_width="0dp"
-            android:layout_height="35dp"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             app:srcCompat="@drawable/home_svgrepo_com"
@@ -426,11 +426,11 @@
 
         <ImageView
             android:id="@+id/profilebutton"
-            android:layout_width="0dp"
-            android:layout_height="35dp"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            app:srcCompat="@drawable/profile_round_1342_svgrepo_com"
+            app:srcCompat="@drawable/profile_svgrepo_com"
             app:tint="#CBF8F4F4" />
 
     </LinearLayout>

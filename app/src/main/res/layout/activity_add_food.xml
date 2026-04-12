@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#FAFAFA">
 
     <LinearLayout
         android:orientation="vertical"
@@ -10,15 +13,41 @@
         android:layout_height="wrap_content">
 
         <!-- Title -->
-        <TextView
-            android:id="@+id/addFoodTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add Food"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_gravity="center_horizontal"
-            android:paddingBottom="16dp"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/back_arrow_navigation_svgrepo_com"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginBottom="20dp"/>
+
+
+            <TextView
+                android:id="@+id/addFoodTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Food"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal"
+                android:paddingBottom="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!-- Food Name -->
         <TextView
@@ -32,8 +61,7 @@
             android:layout_height="48dp"
             android:hint="Enter food name"
             android:inputType="textPersonName"
-            android:padding="8dp"
-            android:background="@android:drawable/edit_text"/>
+            android:padding="8dp"/>
 
         <!-- Calories -->
         <TextView
@@ -48,8 +76,7 @@
             android:layout_height="48dp"
             android:hint="Enter calories"
             android:inputType="number"
-            android:padding="8dp"
-            android:background="@android:drawable/edit_text"/>
+            android:padding="8dp"/>
 
         <!-- Protein -->
         <TextView
@@ -64,8 +91,7 @@
             android:layout_height="48dp"
             android:hint="Enter protein"
             android:inputType="numberDecimal"
-            android:padding="8dp"
-            android:background="@android:drawable/edit_text"/>
+            android:padding="8dp" />
 
         <!-- Carbs -->
         <TextView
@@ -80,8 +106,7 @@
             android:layout_height="48dp"
             android:hint="Enter carbs"
             android:inputType="numberDecimal"
-            android:padding="8dp"
-            android:background="@android:drawable/edit_text"/>
+            android:padding="8dp"/>
 
         <!-- Fat -->
         <TextView
@@ -96,8 +121,7 @@
             android:layout_height="48dp"
             android:hint="Enter fat"
             android:inputType="numberDecimal"
-            android:padding="8dp"
-            android:background="@android:drawable/edit_text"/>
+            android:padding="8dp"/>
 
         <!-- Add Food Button -->
         <Button

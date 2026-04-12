@@ -61,6 +61,12 @@ class NotificationSettingsActivity : AppCompatActivity() {
         waterPresetSpinner = findViewById(R.id.waterPresetSpinner)
         symptomPresetSpinner = findViewById(R.id.symptomPresetSpinner)
 
+        //back button
+        val btnBack = findViewById<ImageView>(R.id.btnBack)
+        btnBack.setOnClickListener {
+            startActivity(Intent(this@NotificationSettingsActivity, DashboardActivity::class.java))
+        }
+
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, presetTimes)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         mealPresetSpinner.adapter = adapter

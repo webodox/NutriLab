@@ -1,7 +1,6 @@
 package com.example.nutrilab
 
 import android.app.DatePickerDialog
-import android.content.Intent
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,10 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -22,6 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import java.util.Date
 import android.widget.*
 
+//user created meal plan - mati sawadogo
 class AddMealPlanActivity : AppCompatActivity() {
 
     private lateinit var foodsRecyclerView: RecyclerView
@@ -54,6 +51,7 @@ class AddMealPlanActivity : AppCompatActivity() {
 
         setupSpinner()
 
+        //editing displayed contents of current meal plan
         val foodAdapter = MealPlanFoodAdapter(foods) { index ->
             val item = foods[index]
 
@@ -69,6 +67,7 @@ class AddMealPlanActivity : AppCompatActivity() {
             loadMealPlan(planId!!, foodAdapter, btnStartDate, btnEndDate)
             }
 
+        //saving updated meal plan edits to database
         btnAddFood.setOnClickListener {
             val name = editFoodName.text.toString()
             val gramsText = editFoodGrams.text.toString()
@@ -96,6 +95,7 @@ class AddMealPlanActivity : AppCompatActivity() {
             editFoodGrams.text.clear()
         }
 
+        //date duration of meal plan
         btnStartDate.setOnClickListener {
             val calendar = Calendar.getInstance()
             DatePickerDialog(
@@ -154,6 +154,7 @@ class AddMealPlanActivity : AppCompatActivity() {
         spinnerMealType.adapter = adapter
     }
 
+    //saving the meal plan to database
     private fun saveMealPlan(mealType: String) {
         val userId = auth.currentUser?.uid ?: return
 
@@ -182,6 +183,7 @@ class AddMealPlanActivity : AppCompatActivity() {
         }
     }
 
+    //display meal plan contents for user for editing
     private fun loadMealPlan(id: String, adapter: MealPlanFoodAdapter, btnStartDate: Button, btnEndDate: Button) {
         db.collection("mealPlanLog")
             .document(id)
@@ -206,6 +208,7 @@ class AddMealPlanActivity : AppCompatActivity() {
                 )
                 adapter.notifyDataSetChanged()
 
+                //display dates for updates/edits
                 val start = doc.getDate("startDate")
                 val end = doc.getDate("endDate")
 
@@ -226,7 +229,9 @@ class AddMealPlanActivity : AppCompatActivity() {
                 }
             }
     }
-}class MealPlanFoodAdapter(private val foods: List<MealPlanFoodItem>, private val onItemClick: (Int) -> Unit):
+}
+//adapter for displaying meal plan contents
+class MealPlanFoodAdapter(private val foods: List<MealPlanFoodItem>, private val onItemClick: (Int) -> Unit):
     RecyclerView.Adapter<MealPlanFoodAdapter.ViewHolder>() {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val txtFood: TextView = view.findViewById(R.id.txtFoodItem)

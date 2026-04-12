@@ -6,13 +6,11 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Button
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.auth.FirebaseAuth
 
+//feedback from users -mati sawadogo
 class FeedbackActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +36,7 @@ class FeedbackActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            //create collection to store feedback
             val feedbackLogs = hashMapOf(
                 "userId" to userId,
                 "subject" to subject,
@@ -45,6 +44,7 @@ class FeedbackActivity : AppCompatActivity() {
                 "timestamp" to com.google.firebase.Timestamp.now()
             )
 
+            //save feedback to database
             FirebaseFirestore.getInstance()
                 .collection("feedback")
                 .add(feedbackLogs)

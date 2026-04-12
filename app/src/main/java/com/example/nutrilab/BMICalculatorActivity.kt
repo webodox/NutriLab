@@ -1,5 +1,6 @@
 package com.example.nutrilab
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -29,6 +30,12 @@ class BMICalculatorActivity : AppCompatActivity() {
         bmiResult = findViewById(R.id.bmiResult)
         bmiCategory = findViewById(R.id.bmiCategory)
         calorieResult = findViewById(R.id.calorieResult)
+
+        //back button
+        val btnBack = findViewById<ImageView>(R.id.btnBack)
+        btnBack.setOnClickListener {
+            startActivity(Intent(this@BMICalculatorActivity, DashboardActivity::class.java))
+        }
 
         val genderAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item,
             arrayOf("Male", "Female"))

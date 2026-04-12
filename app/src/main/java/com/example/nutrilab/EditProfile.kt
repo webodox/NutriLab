@@ -8,12 +8,10 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
+//editing user information -mati sawadogo
 class EditProfile : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +29,7 @@ class EditProfile : AppCompatActivity() {
         val updateLastName = findViewById<EditText>(R.id.updateLastName)
         val btnProfileUpdate = findViewById<Button>(R.id.btnProfileUpdate)
 
+        //get updated information
         FirebaseFirestore.getInstance()
             .collection("users")
             .document(userId)
@@ -40,6 +39,7 @@ class EditProfile : AppCompatActivity() {
                 updateLastName.setText(document.getString("lastName"))
             }
 
+        //update database with changes
         btnProfileUpdate.setOnClickListener{
             val updated = hashMapOf(
                 "firstName" to updateFirstName.text.toString().trim(),

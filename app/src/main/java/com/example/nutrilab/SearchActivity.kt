@@ -32,6 +32,12 @@ class SearchActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, foodResults)
         resultsList.adapter = adapter
 
+        //back button
+        val btnBack = findViewById<ImageView>(R.id.btnBack)
+        btnBack.setOnClickListener {
+            finish()
+        }
+
         searchButton.setOnClickListener {
             val foodName = searchBar.text.toString().trim()
 

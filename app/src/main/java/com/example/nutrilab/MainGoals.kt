@@ -6,11 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
 import android.widget.Toast
 import android.content.Intent
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
+//user goals/reason for joining the app -mati sawadogo
 class MainGoals : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +29,8 @@ class MainGoals : AppCompatActivity() {
             findViewById<Button>(R.id.button26),
             findViewById<Button>(R.id.button27)
         )
+
+        //selecting the buttons
         mainGoalButtons.forEach { button ->
             button.setOnClickListener {
                 if (selectedMainGoalButtons.contains(button)) {
@@ -50,7 +51,7 @@ class MainGoals : AppCompatActivity() {
             }
         }
 
-
+        //submit button
         findViewById<Button>(R.id.submitBtn).setOnClickListener {
             if (selectedMainGoalButtons.isEmpty()) {
                 Toast.makeText(
@@ -60,6 +61,7 @@ class MainGoals : AppCompatActivity() {
                 ).show()
                 return@setOnClickListener
             }
+            //logging user goals into database under userId collection
             val db = FirebaseFirestore.getInstance()
             val createDate = com.google.firebase.Timestamp.now()
 

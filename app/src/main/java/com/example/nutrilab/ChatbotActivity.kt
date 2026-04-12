@@ -18,7 +18,7 @@ class ChatbotActivity : AppCompatActivity() {
     private val messages = ArrayList<String>()
     private lateinit var adapter: ArrayAdapter<String>
 
-    private val OPENAI_API_KEY = "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"
+    private val OPENAI_API_KEY = BuildConfig.OPENAI_API_KEY
     private val conversationHistory = JSONArray()
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -8,3 +8,4 @@
 4. Start an Android emulator, preferably Pixel 5.
 5. Run ./gradlew installDebug to install the app onto the device
 6. The app will launch on the device.
+update!!

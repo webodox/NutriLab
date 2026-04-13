@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.widget.TextView
 import android.widget.ImageView
 import android.widget.Toast
+import android.util.Log
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -59,7 +60,7 @@ class ProfileActivity : AppCompatActivity() {
         }
 
 
-        //first name display and achievements
+        //first name display
         val firstNameText = findViewById<TextView>(R.id.firstNameText)
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
 
@@ -70,16 +71,34 @@ class ProfileActivity : AppCompatActivity() {
             .addOnSuccessListener { document ->
                 val firstName = document.getString("firstName") ?: ""
                 firstNameText.text = firstName
+            }
 
+        //load badge
+        if (userId != null) {
+            loadBadge((userId))
+        }
+    }
+
+    //displaying/updating user achievement badge
+    private fun loadBadge(userId: String) {
+        val badgeImage = findViewById<ImageView>(R.id.achievementBadge)
+        FirebaseFirestore.getInstance()
+            .collection("achievements")
+            .document(userId)
+            .get()
+            .addOnSuccessListener { document ->
                 val badge = document.getString("badge") ?: "bronze"
-                val badgeImage = when (badge) {
+                val badgeResult = when (badge) {
                     "silver" -> R.drawable.silv_badge
                     "gold" -> R.drawable.gold_badge
                     "platinum" -> R.drawable.plat_badge
                     "diamond" -> R.drawable.diam_badge
                     else -> R.drawable.bronz_badge
                 }
-                findViewById<ImageView>(R.id.achievementBadge).setImageResource(badgeImage)
+                badgeImage.setImageResource(badgeResult)
+            }
+            .addOnFailureListener {
+                Log.e("Profile", "Failed to load badge")
             }
     }
 

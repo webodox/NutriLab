@@ -3,6 +3,8 @@ package com.example.nutrilab
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.OutputStreamWriter
@@ -20,6 +22,7 @@ class ChatbotActivity : AppCompatActivity() {
 
     private val OPENAI_API_KEY = BuildConfig.OPENAI_API_KEY
     private val conversationHistory = JSONArray()
+    private var userAllergies: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +35,26 @@ class ChatbotActivity : AppCompatActivity() {
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, messages)
         chatHistory.adapter = adapter
 
-        addMessage("NutriBot: Hi! I'm NutriBot, your personal nutrition assistant. I can help you with meal plans, nutrition advice, and app support. How can I help you today?")
+        // Load user allergies from Firebase then greet
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId != null) {
+            FirebaseFirestore.getInstance()
+                .collection("users")
+                .document(userId)
+                .get()
+                .addOnSuccessListener { document ->
+                    val allergies = document.get("allergies") as? List<*> ?: emptyList<String>()
+                    if (allergies.isNotEmpty()) {
+                        userAllergies = allergies.joinToString(", ")
+                    }
+                    addMessage("NutriBot: Hi! I'm NutriBot, your personal nutrition assistant. I can help you with meal plans, nutrition advice, and app support. How can I help you today?")
+                }
+                .addOnFailureListener {
+                    addMessage("NutriBot: Hi! I'm NutriBot, your personal nutrition assistant. I can help you with meal plans, nutrition advice, and app support. How can I help you today?")
+                }
+        } else {
+            addMessage("NutriBot: Hi! I'm NutriBot, your personal nutrition assistant. I can help you with meal plans, nutrition advice, and app support. How can I help you today?")
+        }
 
         sendButton.setOnClickListener {
             val userMessage = messageInput.text.toString().trim()
@@ -53,11 +75,15 @@ class ChatbotActivity : AppCompatActivity() {
             try {
                 val messagesArray = JSONArray()
 
+                val allergyText = if (userAllergies.isNotEmpty())
+                    "The user has the following dietary restrictions and allergies: $userAllergies. Never suggest foods containing these allergens in any meal plans or recommendations."
+                else ""
+
                 val systemMessage = JSONObject()
                 systemMessage.put("role", "system")
                 systemMessage.put("content", "You are NutriBot, a helpful nutrition assistant for the NutriLab app. " +
                         "You help users with meal planning, nutrition advice, calorie tracking, and healthy eating habits. " +
-                        "Keep responses concise and friendly. " +
+                        "Keep responses concise and friendly. $allergyText " +
                         "If asked to generate a meal plan, provide a simple daily meal plan with breakfast, lunch, dinner and snacks.")
                 messagesArray.put(systemMessage)
 
